@@ -25,7 +25,7 @@ index.html
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         .login-bg { 
-            background: url('https://public.readdy.ai/ai/img_res/ee0c7da3b59033b71c45fad2dac53011.jpg') no-repeat center/cover;
+            background: url('idexBG.jpg') no-repeat center/cover;
         }
     </style>
 </head>
