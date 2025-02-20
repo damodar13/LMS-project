@@ -1,0 +1,220 @@
+# LMS-project
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#4F46E5', secondary: '#0EA5E9' },
+                    borderRadius: { button: '8px' }
+                }
+            }
+        }
+    </script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        .login-bg { 
+            background: url('https://public.readdy.ai/ai/img_res/ee0c7da3b59033b71c45fad2dac53011.jpg') no-repeat center/cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex">
+    <div class="hidden lg:flex w-1/2 login-bg relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/40"></div>
+        <div class="relative z-10 p-12 text-white">
+            <h1 class="text-4xl font-bold font-['Pacifico'] mb-6">
+                <img src="https://scmirt.org/wp-content/uploads/2022/10/logo-scmirt316.png" alt="SCMIRT Logo" class="h-12">
+            </h1>
+            <div class="max-w-md">
+                <h2 class="text-3xl font-bold mb-4">Welcome to Our Digital Library</h2>
+                <p class="text-lg opacity-90">Access thousands of books, manage borrowings, and discover knowledge here.</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1 flex items-center justify-center p-8">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-gray-900">Sign in to your account</h1>
+                <p class="mt-2 text-gray-600">Or start your journey with us</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <div class="flex gap-4 mb-6">
+                    <button id="studentBtn" class="flex-1 py-2 px-4 rounded-button bg-primary text-white font-medium text-sm">Student</button>
+                    <button id="adminBtn" class="flex-1 py-2 px-4 rounded-button bg-gray-100 text-gray-600 font-medium text-sm">Admin</button>
+                </div>
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ri-mail-line text-gray-400"></i>
+                            </div>
+                            <input type="email" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="ri-lock-line text-gray-400"></i>
+                            </div>
+                            <input type="password" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                            <label for="remember" class="ml-2 text-sm text-gray-700">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm font-medium text-primary hover:text-primary/90">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-button font-medium hover:bg-primary/90">Sign in</button>
+                </form>
+                <p class="mt-6 text-center text-sm text-gray-600">
+                    Don't have an account? <a href="#" id="signupLink" class="font-medium text-primary hover:text-primary/90">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg w-full max-w-md p-8 relative">
+            <button class="absolute right-4 top-4 text-gray-500 hover:text-gray-700" id="closeSignup">
+                <i class="ri-close-line ri-lg"></i>
+            </button>
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900">SCMIRT Library Sign Up</h2>
+            </div>
+            <form id="signupForm" class="space-y-4">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-user-line text-gray-400"></i>
+                    </div>
+                    <input type="text" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm" placeholder="Full Name" required>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-phone-line text-gray-400"></i>
+                    </div>
+                    <input type="tel" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm" placeholder="Contact Number" required>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-mail-line text-gray-400"></i>
+                    </div>
+                    <input type="email" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm" placeholder="Email ID" required>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-book-line text-gray-400"></i>
+                    </div>
+                    <select class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm appearance-none bg-white" required>
+                        <option value="" disabled selected>Select Course</option>
+                        <option value="cs">Computer Science</option>
+                        <option value="eng">Engineering</option>
+                        <option value="med">Medical Science</option>
+                        <option value="arts">Arts & Humanities</option>
+                    </select>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-lock-line text-gray-400"></i>
+                    </div>
+                    <input type="password" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm" placeholder="Password" required>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-lock-line text-gray-400"></i>
+                    </div>
+                    <input type="password" class="w-full pl-10 pr-3 py-2 border-gray-200 rounded-md text-sm" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" class="w-full bg-[#003366] text-white py-2 px-4 rounded-button font-medium hover:bg-[#002244]">Sign Up</button>
+                <p class="text-center mt-4 text-sm">
+                    Already have an account? <a href="#" id="backToLogin" class="text-primary hover:text-primary/90">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Button toggles for Student/Admin
+        const studentBtn = document.getElementById('studentBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        studentBtn.addEventListener('click', () => {
+            studentBtn.classList.add('bg-primary', 'text-white');
+            studentBtn.classList.remove('bg-gray-100', 'text-gray-600');
+            adminBtn.classList.remove('bg-primary', 'text-white');
+            adminBtn.classList.add('bg-gray-100', 'text-gray-600');
+        });
+        adminBtn.addEventListener('click', () => {
+            adminBtn.classList.add('bg-primary', 'text-white');
+            adminBtn.classList.remove('bg-gray-100', 'text-gray-600');
+            studentBtn.classList.remove('bg-primary', 'text-white');
+            studentBtn.classList.add('bg-gray-100', 'text-gray-600');
+        });
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const isAdmin = adminBtn.classList.contains('bg-primary');
+            window.location.href = isAdmin ? '/admin-dashboard' : '/student-dashboard';
+        });
+
+        // Signup modal logic
+        const signupLink = document.getElementById('signupLink');
+        const signupModal = document.getElementById('signupModal');
+        const closeSignup = document.getElementById('closeSignup');
+        const backToLogin = document.getElementById('backToLogin');
+
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        closeSignup.addEventListener('click', () => {
+            signupModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        signupModal.addEventListener('click', (e) => {
+            if (e.target === signupModal) {
+                signupModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        backToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Signup form submission
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const password = form.querySelector('input[type="password"]').value;
+            const confirmPassword = form.querySelectorAll('input[type="password"]')[1].value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            alert('Account created successfully! Redirecting...');
+            signupModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            window.location.href = '/student-dashboard';
+        });
+    </script>
+</body>
+</html>
